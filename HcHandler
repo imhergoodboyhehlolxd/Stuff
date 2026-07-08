@@ -156,7 +156,7 @@ end
 
 function Handler:Get_Player(Text: string): Player?
 	for Index, Player in pairs(Players:GetPlayers()) do
-		if Player and Player ~= LocalPlayer and (Player.Name:lower():sub(1, #Text) == Text:lower() or Player.DisplayName:lower():sub(1, #Text) == Text:lower()) then
+		if Player and (Player.Name:lower():sub(1, #Text) == Text:lower() or Player.DisplayName:lower():sub(1, #Text) == Text:lower()) then
 			return Player
 		end
 	end
