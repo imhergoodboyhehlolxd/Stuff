@@ -1,24 +1,9 @@
---[[
-    2/22/2026
-    Library.lua
-    Purpose:
-        NH ui library
-
-    Author: @joestar._3
-    Dependencies:
-        None
-]]
-
--- hi guys
-
 if getgenv().Library and getgenv().Library.Exit then
     getgenv().Library:Exit()
 end
 
--- Bad executor support (atleast by a bit)
 cloneref = cloneref or function(Object) return Object end
 
---#region Services
 local Players = game:GetService("Players")
 local UserInputService = game:GetService("UserInputService")
 local RunService = game:GetService("RunService")
@@ -29,11 +14,9 @@ local Lighting = game:GetService("Lighting")
 local ContextActionService = game:GetService("ContextActionService")
 local CoreGui = cloneref(game:GetService("CoreGui"))
 local GuiService = game:GetService("GuiService")
---#endregion
 
 gethui = gethui or function() return CoreGui end
 
---#region Variables
 local LocalPlayer = Players.LocalPlayer
 local Camera = Workspace.CurrentCamera
 local Mouse = cloneref(LocalPlayer:GetMouse())
@@ -77,7 +60,6 @@ local BlockedWindowInputs = {
     Enum.KeyCode.Nine,
     Enum.KeyCode.Zero
 }
---#endregion
 
 local Library = {
     Flags = {},
@@ -86,7 +68,7 @@ local Library = {
     Colorpickers = {},
     MenuKeybind = tostring(Enum.KeyCode.X),
 
-    Directory = "niggahack",
+    Directory = "ETERNITYY",
     Folders = {
         Assets = "/Assets",
         Configs = "/Configs"
@@ -102,7 +84,6 @@ local Library = {
 
     Theme = nil,
 
-    -- Ignore below
     Threads = {},
     Connections = {},
     Notifications = {},
@@ -210,7 +191,6 @@ do
         ["RightAlt"]         = "RightAlt"
     }
 
-    -- Folders
     if not isfolder(Library.Directory) then
         makefolder(Library.Directory)
     end
@@ -240,7 +220,6 @@ do
 
     Library.Theme = Themes.Preset
 
-    -- Custom Font
     local CustomFont = {}
     do
         function CustomFont:New(Name, Weight, Style, Data)
@@ -1204,7 +1183,6 @@ Library.LoadConfig = function(Self, Config)
             end
         end
 
-        -- Second pass: Trigger all toggle callbacks
         for Index, Value in FlagData do
             local Toggle = Library.Toggles and Library.Toggles[Index]
             if Toggle and Toggle.Callback then
@@ -2138,7 +2116,7 @@ end
                 elseif type(Color) == "string" then
                     Color = Color3.fromHex(Color)
                 else
-                    Color = Color -- lul
+                    Color = Color
                 end
 
                 Colorpicker.Hue, Colorpicker.Saturation, Colorpicker.Value = Color:ToHSV()
@@ -3784,7 +3762,6 @@ end
                 local MainPos = MainWindow.Position
                 local MainSize = MainWindow.AbsoluteSize
 
-                -- Match main window width, keep logger shorter, and place it clearly below the main window.
                 Frame.Size = UDim2.new(0, MainSize.X, 0, 220)
                 Frame.Position = UDim2.new(0, MainPos.X.Offset, 0, MainPos.Y.Offset + MainSize.Y + 10)
             end
@@ -9856,7 +9833,7 @@ end
             return setmetatable(Textbox, Library)
         end
 
-        Library.Searchbox = function(Self, Params) -- just the dropdown func with diff items
+        Library.Searchbox = function(Self, Params)
             Params = Params or {}
 
             local Dropdown = {
