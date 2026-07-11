@@ -9285,48 +9285,52 @@ end
                 Library:SafeCall(Dropdown.Callback, Dropdown.Value)
             end
 
-    function Dropdown:SetSelected(Value)
+        function Dropdown:SetSelected(Value)
         if Dropdown.Multi then
             if type(Value) ~= "table" then
-             return
+            return
+        end
+
+        for _, Option in pairs(Dropdown.Options) do
+            Option.IsSelected = false
+            Option:ToggleState("Inactive")
+        end
+
+        Dropdown.Value = {}
+        for _, SelectedValue in ipairs(Value) do
+            local OptionData = Dropdown.Options[SelectedValue]
+            if OptionData then
+                OptionData.IsSelected = true
+                OptionData:ToggleState("Active")
+                table.insert(Dropdown.Value, SelectedValue)
             end
-        
-            for _, Option in pairs(Dropdown.Options) do
-                Option.IsSelected = false
-                Option:ToggleState("Inactive")
-            end
-        
-            Dropdown.Value = {}
-            for _, SelectedValue in ipairs(Value) do
-                local OptionData = Dropdown.Options[SelectedValue]
-                if OptionData then
-                    OptionData.IsSelected = true
-                    OptionData:ToggleState("Active")
-                    table.insert(Dropdown.Value, SelectedValue)
-                end
-            end
-        
+        end
+
             Flags[Dropdown.Flag] = Dropdown.Value
             Items["Value"].Instance.Text = #Dropdown.Value > 0 and table.concat(Dropdown.Value, ", ") or ""
         else
             local OptionData = Dropdown.Options[Value]
             if not OptionData then
-                return
+             return
             end
-        
+
             for _, Option in pairs(Dropdown.Options) do
                 Option.IsSelected = false
                 Option:ToggleState("Inactive")
             end
-        
+
             OptionData.IsSelected = true
             OptionData:ToggleState("Active")
             Dropdown.Value = Value
             Flags[Dropdown.Flag] = Value
             Items["Value"].Instance.Text = Value
-            end
-    
+        end
+
+        if Library and type(Library.SafeCall) == "function" then
             Library:SafeCall(Dropdown.Callback, Dropdown.Value)
+        elseif Dropdown.Callback then
+            pcall(Dropdown.Callback, Dropdown.Value)
+            end
         end
 
             function Dropdown:Add(Value)
