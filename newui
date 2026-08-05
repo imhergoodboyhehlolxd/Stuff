@@ -562,8 +562,8 @@ local Library do
             end
         end
 
-        CustomFont:New("TahomaXP", 400, "Regular", {
-            Url = "https://github.com/sametexe001/luas/raw/refs/heads/main/fonts/windows-xp-tahoma.ttf"
+        CustomFont:New("AngelBunny", 400, "Regular", {
+            Url = "https://github.com/imhergoodboyhehlolxd/Stuff/raw/main/AngelBunny-Regular.ttf"
         })
 
         CustomFont:New("TahomaBold", 400, "Regular", {
@@ -574,8 +574,8 @@ local Library do
             Url = "https://github.com/sametexe001/luas/raw/refs/heads/main/fonts/smallest_pixel-7.ttf"
         })
 
-        Library.Font = CustomFont:Get("TahomaXP")
-        Library.BoldFont = CustomFont:Get("TahomaBold")
+        Library.Font = CustomFont:Get("AngelBunny")
+        Library.BoldFont = CustomFont:Get("AngelBunny")
         Library.SmallFont = CustomFont:Get("SmallestPixel")
     end
 
